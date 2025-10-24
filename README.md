@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Company Registration Form
+
+A responsive multi-step form application for company registration built with Next.js, TypeScript, and Styled Components.
+
+## Features
+
+- **Multi-step form** with 3 steps: Business Structure, Contact Person, and Review & Submit
+- **Form validation** with user-friendly error messages
+- **Persistent data** - form data is saved in browser storage
+- **Responsive design** - works seamlessly on mobile, tablet, and desktop
+- **Step navigation** - users can move between completed steps
+- **API integration** - submits company data to a REST API
+
+## Tech Stack
+
+- Next.js (latest version)
+- React with TypeScript
+- Styled Components
+- Zustand (state management)
+- Zod (form validation)
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Learn More
+## Form Steps
 
-To learn more about Next.js, take a look at the following resources:
+### Step 1: Business Structure
+- Company name
+- Company type
+- Address (line 1, line 2, city, state, zip)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Step 2: Contact Person
+- First name and last name
+- Email address
+- Phone number
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Step 3: Review & Submit
+- Review all entered information
+- Edit previous steps if needed
+- Submit to API
+- View success or error messages
 
-## Deploy on Vercel
+## Validation Rules
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- All fields are required except address line 2
+- ZIP code must be 5 digits
+- Email must be a valid email address
+- Phone must follow format: +1 (234) 454-2345
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## API
+
+The form submits to: `https://ss-company.free.beeceptor.com/company`
+
+**Success Response:**
+```json
+{
+  "status": "ok",
+  "message": "Thanks for submitting your company! We'll be in touch shortly."
+}
+```
+
+**Error Response (duplicate name):**
+```json
+{
+  "status": "error",
+  "message": "A company with the same name has been detected..."
+}
+```
+
